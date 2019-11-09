@@ -24,12 +24,12 @@ class HOSPITON19_API IPickupableActor
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-	UFUNCTION(BlueprintNativeEvent, Category = "Interaction")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void Pickup(class USceneComponent* InAttachTarget, USceneComponent* InHandMesh, EControllerHand InHandType, bool InFlipSocket);
 
-	UFUNCTION(BlueprintNativeEvent, Category = "Interaction")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void Drop();
 
-	UFUNCTION(BlueprintNativeEvent, Category = "Interaction")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	EHandPose SetGripType();
 };
