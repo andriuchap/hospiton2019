@@ -5,8 +5,20 @@
 	{
 		"/actions/main":
 		{
-			"sources": []
+			"sources": [
+				{
+					"mode": "button",
+					"path": "/user/head/proximity",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/HeadsetOn"
+						}
+					}
+				}
+			]
 		}
 	},
-	"description": ""
+	"description": "UE4Editor.exe"
 }
