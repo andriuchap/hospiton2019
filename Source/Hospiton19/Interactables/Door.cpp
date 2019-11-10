@@ -36,14 +36,13 @@ void ADoor::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (PullingComponent != nullptr)
 	{
-		FVector DoorHandleLocation = HandlePoint->GetComponentLocation();
 		FVector PullingComponentLocation = PullingComponent->GetComponentLocation();
 		// Assumes that the root location of the door mesh is at the hinge!
 		FVector DoorHingeLocation = DoorMesh->GetComponentLocation();
 		// put all positions on the same plane.
-		DoorHandleLocation.Z = PullingComponentLocation.Z = DoorHingeLocation.Z = 0;
+		PullingComponentLocation.Z = DoorHingeLocation.Z = 0;
 
-		FVector HingeToPuller = PullingComponentLocation - (DoorHingeLocation + DoorHandleOffset);
+		FVector HingeToPuller = PullingComponentLocation - DoorHingeLocation + InitialOffset;
 		FRotator NewDoorRotation = HingeToPuller.ToOrientationRotator();
 
 		DoorMesh->SetWorldRotation(NewDoorRotation);
@@ -53,8 +52,8 @@ void ADoor::Tick(float DeltaTime)
 void ADoor::StartPulling_Implementation(USceneComponent * InPullingComp)
 {
 	PullingComponent = InPullingComp;
-	DoorHandleOffset = InPullingComp->GetComponentLocation() - HandlePoint->GetComponentLocation();
-	DoorHandleOffset.Z = 0;
+	InitialOffset = HandlePoint->GetComponentLocation() - InPullingComp->GetComponentLocation();
+	InitialOffset.Z = 0;
 }
 
 void ADoor::StopPulling_Implementation()

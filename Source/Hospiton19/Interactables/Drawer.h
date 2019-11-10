@@ -5,36 +5,36 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Interaction/PullableActor.h"
-#include "Door.generated.h"
+#include "Drawer.generated.h"
 
 UCLASS()
-class HOSPITON19_API ADoor : public AActor, public IPullableActor
+class HOSPITON19_API ADrawer : public AActor, public IPullableActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ADoor(const FObjectInitializer &ObjInitializer);
+	ADrawer(const FObjectInitializer &ObjInitializer);
 
 protected:
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Door")
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Drawer")
 	class USceneComponent* RootScene;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Door")
-	class UStaticMeshComponent* DoorMesh;
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Drawer")
+	class UStaticMeshComponent* DrawerMesh;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Door")
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Drawer")
 	class UArrowComponent* HandlePoint;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door")
-	FRotator MinRotation;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door")
-	FRotator MaxRotation;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Drawer")
+	float MaxPullDistance;
 
 private:
+
 	USceneComponent* PullingComponent;
 
-	FRotator ClosedRotation;
+	float PendingPullDistance;
+	float PullDistance;
 	FVector InitialOffset;
 
 protected:
@@ -48,5 +48,4 @@ public:
 	virtual void StartPulling_Implementation(USceneComponent* InPullingComp) override;
 
 	virtual void StopPulling_Implementation() override;
-
 };
