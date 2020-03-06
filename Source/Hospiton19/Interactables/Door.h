@@ -30,6 +30,8 @@ protected:
 	FRotator MinRotation;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door")
 	FRotator MaxRotation;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door")
+	float DirectionMultiplier;
 
 private:
 	USceneComponent* PullingComponent;

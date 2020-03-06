@@ -21,6 +21,8 @@ ADoor::ADoor(const FObjectInitializer &ObjInitializer)
 	HandlePoint = CreateDefaultSubobject<UArrowComponent>(TEXT("HandlePoint"));
 	HandlePoint->SetupAttachment(DoorMesh);
 	HandlePoint->SetHiddenInGame(true);
+
+	DirectionMultiplier = 1.0F;
 }
 
 // Called when the game starts or when spawned
@@ -42,7 +44,7 @@ void ADoor::Tick(float DeltaTime)
 		// put all positions on the same plane.
 		PullingComponentLocation.Z = DoorHingeLocation.Z = 0;
 
-		FVector HingeToPuller = PullingComponentLocation - DoorHingeLocation + InitialOffset;
+		FVector HingeToPuller = (PullingComponentLocation - DoorHingeLocation + InitialOffset) * DirectionMultiplier;
 		FRotator NewDoorRotation = HingeToPuller.ToOrientationRotator();
 
 		DoorMesh->SetWorldRotation(NewDoorRotation);
